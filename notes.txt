@@ -1,0 +1,30 @@
+COURSE SCHEDULER
+python django
+
+title: bu polangui course scheduler
+
+2 types of users: Department Head(admin) and Instructor
+
+Login page
+register page
+
+course year block manage page
+Room manage page (room type: lecture or laboratory)
+Subject manage page (under ng isang department)
+instructor manage page(admin)
+
+department manage page
+schedule manage page (1 subject per week)
+
+
+example schedule creation dropdown
+
+[Select Department]
+-BSIT (Prof1)
+-BSIT (Prof2)
+-BSCS (Prof1)
+
+
+[Select room]
+-room1
+-room2
