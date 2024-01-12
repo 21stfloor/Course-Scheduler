@@ -17,6 +17,12 @@ def register_request(request):
 
     return render(request, 'user/register.html', {'form':form})
 
-class CustomLoginView(LoginView):
+class UserLoginView(LoginView):
     template_name = 'user/login.html'
+    
+    def get_success_url(self):
+        return redirect('home')
+    
+def home(request):
+    return render(request, 'user/home.html')
 
