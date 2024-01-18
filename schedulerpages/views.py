@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.views import LoginView, LogoutView
 from django.contrib.auth import authenticate, login
 from django.http import HttpResponse
+from django.urls import reverse
 from .forms import RegistrationForm
 from .models import Course
 # Create your views here.
@@ -22,7 +23,9 @@ class UserLoginView(LoginView):
     template_name = 'user/login.html'
     
     def get_success_url(self):
-        return redirect('home')
+        #redirect to user/home.html
+        print(self.request.user)
+        return reverse('home')
     
 def home(request):
     data = Course.objects.all()
