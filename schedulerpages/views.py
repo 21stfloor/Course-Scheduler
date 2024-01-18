@@ -3,6 +3,7 @@ from django.contrib.auth.views import LoginView, LogoutView
 from django.contrib.auth import authenticate, login
 from django.http import HttpResponse
 from .forms import RegistrationForm
+from .models import Course
 # Create your views here.
 
 def register_request(request):
@@ -24,5 +25,8 @@ class UserLoginView(LoginView):
         return redirect('home')
     
 def home(request):
-    return render(request, 'user/home.html')
+    data = Course.objects.all()
+    context = {'data': data}
+    
+    return render(request, 'user/home.html', context)
 
