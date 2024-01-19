@@ -3,6 +3,8 @@ from django.contrib.auth.forms import UserCreationForm
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Submit
 from django.contrib.auth.models import User
+from .models import Course
+from .tables import CourseTable
 
 class RegistrationForm(UserCreationForm):
     # class Meta:
@@ -36,3 +38,11 @@ class RegistrationForm(UserCreationForm):
         if commit:
             user.save()
         return user
+    
+# class CourseForm(forms.ModelForm):
+#     # purpose = forms.ChoiceField(choices=Purpose.choices)
+    
+#     class Meta:
+#         model = Course
+#         fields = ("Course Code", "Course, Year & Block", "Descriptive Title", "Lecture Units", "Laboratory Units" "Total Units", "Adviser" )
+    
