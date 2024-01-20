@@ -80,11 +80,15 @@
             {% endblock %}
             {% block pagination %}{% pagination cl %}{% endblock %}
             </form>
+
+
             <!-- course table -->
-            {% load render_table from django_tables2 %}
-            <div class="table-responsive">
-                {% render_table table %}
-            </div>
+            {% if cl.opts.app_label == 'schedulerpages' and cl.opts.model_name == 'course' %}
+                {% load render_table from django_tables2 %}
+                <div class="table-responsive">
+                    {% render_table table %}
+                </div>
+            {% endif %}
         </div>
         {% block filters %}
             {% if cl.has_filters %}

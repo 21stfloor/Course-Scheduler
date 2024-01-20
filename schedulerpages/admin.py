@@ -1,7 +1,8 @@
 from django.contrib import admin
 from django.apps import apps
+from django.contrib.auth.models import Group
 from django_tables2 import RequestConfig
-from .models import Course
+from .models import Course, Instructor, CustomUser, InstructorCourse, Departments
 from .tables import CourseTable
 
 # Register your models here.
@@ -22,8 +23,23 @@ class CourseModelAdmin(admin.ModelAdmin):
         )
 
 
+@admin.register(CustomUser)
+class AdminCustomUser(admin.ModelAdmin):
+    pass
+
+
 # Register your ModelAdmin
 
 admin.site.register(Course, CourseModelAdmin)
+admin.site.register(Instructor)
+
 app_config = apps.get_app_config('schedulerpages')
 models = app_config.get_models()
+
+for model in models:
+    try:
+        admin.site.register(model)
+    except admin.sites.AlreadyRegistered:
+        pass
+
+admin.site.unregister((Group, InstructorCourse, Departments))
