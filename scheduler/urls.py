@@ -20,8 +20,5 @@ from django.urls import path, include
 from django.conf import settings
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
-    path('', views.register_request, name='register'),
-    path('dashboard/', views.home, name='home'),
-    path('login/', views.UserLoginView.as_view(), name='login'),
+    path('', admin.site.urls), # this is the admin page
 ]

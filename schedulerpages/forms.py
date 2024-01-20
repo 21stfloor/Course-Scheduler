@@ -7,15 +7,7 @@ from .models import Course
 from .tables import CourseTable
 
 class RegistrationForm(UserCreationForm):
-    # class Meta:
-    #     model = User
-    #     fields = ['username', 'password1', 'password2']
 
-    # def __init__(self, *args, **kwargs):
-    #     super(RegistrationForm, self).__init__(*args,**kwargs)
-    #     self.helper = FormHelper(self)
-    #     self.helper.form_method = 'post'
-    #     self.helper.add_input(Submit('submit', 'Register'))
     password1 = forms.CharField(label='Password', widget=forms.PasswordInput)
     password2 = forms.CharField(label='Password confirmation', widget=forms.PasswordInput)
 
@@ -39,10 +31,4 @@ class RegistrationForm(UserCreationForm):
             user.save()
         return user
     
-# class CourseForm(forms.ModelForm):
-#     # purpose = forms.ChoiceField(choices=Purpose.choices)
-    
-#     class Meta:
-#         model = Course
-#         fields = ("Course Code", "Course, Year & Block", "Descriptive Title", "Lecture Units", "Laboratory Units" "Total Units", "Adviser" )
     

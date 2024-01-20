@@ -9,18 +9,6 @@ admin.site.site_title = "BU Polangui Course Scheduler"
 admin.site.index_title = ""
 
 class CourseModelAdmin(admin.ModelAdmin):
-    # Your other ModelAdmin configurations here
-
-    # def get_context_data(self, request, **kwargs):
-    #     context = super().get_context_data(request, **kwargs)
-
-    #     # Create an instance of your custom table
-    #     course_table = CourseTable(data=Course.objects.all())
-
-    #     # Add the custom table to the context
-    #     context['course_table'] = course_table
-
-    #     return context
     
      def changelist_view(self, request, extra_context=None):
         extra_context = extra_context or {}

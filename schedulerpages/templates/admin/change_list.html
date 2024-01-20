@@ -56,14 +56,13 @@
         </p>
         {{ cl.formset.non_form_errors }}
     {% endif %}
-    
-    {% if cl.opts.model_name == 'course' and user.is_staff and not user.is_superuser %}
+
+
+    {% if cl.opts.model_name == 'course' and user.is_staff and not user.is_superuser %} <!--  staff visibility condition    -->
    
-        {% load render_table from django_tables2 %}
-        <div class="table-responsive">
-            {% render_table table %}
-        </div>
+
     {% else %}
+
         <div class="module{% if cl.has_filters %} filtered{% endif %}" id="changelist">
         <div class="changelist-form-container">
             {% block search %}{% search_form cl %}{% endblock %}
@@ -81,6 +80,11 @@
             {% endblock %}
             {% block pagination %}{% pagination cl %}{% endblock %}
             </form>
+            <!-- course table -->
+            {% load render_table from django_tables2 %}
+            <div class="table-responsive">
+                {% render_table table %}
+            </div>
         </div>
         {% block filters %}
             {% if cl.has_filters %}
