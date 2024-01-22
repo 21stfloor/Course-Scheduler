@@ -25,9 +25,7 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
                           primary_key=True, default=id_gen, editable=False)
     email = models.EmailField(_("email address"), unique=True, blank=False)
     firstname = models.CharField(max_length=50, blank=True, null=True)
-    # Field name made lowercase.
     middlename = models.CharField(max_length=50, blank=True, null=True)
-    # Field name made lowercase.
     lastname = models.CharField(max_length=50, blank=True, null=True)
 
     is_staff = models.BooleanField(default=False)
@@ -70,7 +68,7 @@ class Course(models.Model):
     descriptive_title = models.CharField(max_length=1000)
     lecture_units = models.FloatField(default=0)
     laboratory_units = models.FloatField(default=0)
-    course_department = models.ManyToManyField(Departments, through="InstructorCourse")
+    course_department = models.ForeignKey(Departments, on_delete=models.CASCADE, blank=False, null=False)
     total_units = models.FloatField(default=0)
     adviser = models.CharField(max_length=100)
 
@@ -78,16 +76,11 @@ class Course(models.Model):
         return self.course_code
 
 
-class Instructor(CustomUser):
+class Instructor(models.Model):
+    user = models.OneToOneField(CustomUser, on_delete=models.CASCADE, primary_key=True)
     instructor_id = models.CharField(max_length=100, unique=True)
     instructor_name = models.CharField(max_length=100)
-    instructor_department = models.ForeignKey(Departments, on_delete=models.CASCADE)
+    instructor_department = models.ForeignKey(Departments, on_delete=models.CASCADE, blank=False, null=False)
 
     def __str__(self):
         return self.instructor_name
-
-
-class InstructorCourse(models.Model):
-    instructor = models.ForeignKey(Instructor, on_delete=models.CASCADE)
-    course = models.ForeignKey(Course, on_delete=models.CASCADE)
-    department = models.ForeignKey(Departments, on_delete=models.CASCADE)

@@ -2,7 +2,7 @@ from django.contrib import admin
 from django.apps import apps
 from django.contrib.auth.models import Group
 from django_tables2 import RequestConfig
-from .models import Course, Instructor, CustomUser, InstructorCourse, Departments
+from .models import Course, Instructor, CustomUser, Departments
 from .tables import CourseTable
 
 # Register your models here.
@@ -28,6 +28,7 @@ class AdminCustomUser(admin.ModelAdmin):
     pass
 
 
+
 # Register your ModelAdmin
 
 admin.site.register(Course, CourseModelAdmin)
@@ -42,4 +43,4 @@ for model in models:
     except admin.sites.AlreadyRegistered:
         pass
 
-admin.site.unregister((Group, InstructorCourse, Departments))
+admin.site.unregister((Group, Departments))
