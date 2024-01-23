@@ -4,6 +4,7 @@ from django.contrib.auth.models import User, PermissionsMixin
 from django.utils import timezone
 from django.db import models
 from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin
+from django.core.validators import MinValueValidator, MaxValueValidator
 from django.utils import timezone
 from django.utils.translation import gettext_lazy as _
 from schedulerpages.managers import CustomUserManager
@@ -66,10 +67,10 @@ class Course(models.Model):
     course_code = models.CharField(max_length=10, unique=True)
     course_year_block = models.CharField(max_length=100)
     descriptive_title = models.CharField(max_length=1000)
-    lecture_units = models.FloatField(default=0)
-    laboratory_units = models.FloatField(default=0)
+    lecture_units = models.FloatField(validators=[MinValueValidator(0)], default=0)
+    laboratory_units = models.FloatField(validators=[MinValueValidator(0)], default=0)
     course_department = models.ForeignKey(Departments, on_delete=models.CASCADE, blank=False, null=False)
-    total_units = models.FloatField(default=0)
+    total_units = models.FloatField(validators=[MinValueValidator(0)], default=0)
     adviser = models.CharField(max_length=100)
 
     def __str__(self):

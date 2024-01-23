@@ -27,6 +27,12 @@ class CourseModelAdmin(admin.ModelAdmin):
 class AdminCustomUser(admin.ModelAdmin):
     pass
 
+@admin.register(Departments)
+class AdminDepartments(admin.ModelAdmin):
+    list_display = ('department_name',)
+
+    def get_queryset(self, request):
+        return Departments.objects.all().order_by('department_name')
 
 
 # Register your ModelAdmin
@@ -43,4 +49,4 @@ for model in models:
     except admin.sites.AlreadyRegistered:
         pass
 
-admin.site.unregister((Group, Departments))
+admin.site.unregister((Group))
