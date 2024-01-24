@@ -2,8 +2,8 @@ from django.contrib import admin
 from django.apps import apps
 from django.contrib.auth.models import Group
 from django_tables2 import RequestConfig
-from .models import Course, Instructor, CustomUser, Departments, Rooms
-from .tables import CourseTable
+from .models import Course, Instructor, CustomUser, Departments, Rooms, Schedule
+from .tables import CourseTable, ScheduleTable
 
 # Register your models here.
 admin.site.site_header = "BU Polangui Course Scheduler"
@@ -34,9 +34,21 @@ class AdminDepartments(admin.ModelAdmin):
     def get_queryset(self, request):
         return Departments.objects.all().order_by('department_name')
 
+@admin.register(Schedule)
+class ScheduleModelAdmin(admin.ModelAdmin):
+    list_display = ('course', 'instructor', 'room')
 
+    def changelist_view(self, request, extra_context=None):
+        extra_context = extra_context or {}
+        schedule_table = ScheduleTable(data=Schedule.objects.all())
+        RequestConfig(request).configure(schedule_table)
+        extra_context['schedule_table'] = schedule_table
+        return super(ScheduleModelAdmin, self).changelist_view(
+            request, extra_context=extra_context,
+        )
 # Register your ModelAdmin
 
+admin.site.register(Course, CourseModelAdmin)
 
 app_config = apps.get_app_config('schedulerpages')
 models = app_config.get_models()

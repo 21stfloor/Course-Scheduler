@@ -1,6 +1,7 @@
 from django.contrib.auth.base_user import AbstractBaseUser
 from django.db import models
 from django.contrib.auth.models import User, PermissionsMixin
+from django.urls import reverse
 from django.utils import timezone
 from django.db import models
 from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin
@@ -16,7 +17,14 @@ import uuid
 ID_LENGTH = 30
 DEVICE_ID_LENGTH = 15
 
-
+DAYS_OF_THE_WEEK = (
+    ('Mon', 'Monday'),
+    ('Tues', 'Tuesday'),
+    ('Wed', 'Wednesday'),
+    ('Thurs', 'Thursday'),
+    ('Fri', 'Friday'),
+    ('Sat', 'Saturday'),   
+)
 def id_gen() -> str:
     """Generates random string whose length is `ID_LENGTH`"""
     return int_to_base36(uuid.uuid4().int)[:ID_LENGTH]
@@ -49,7 +57,6 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
         return f'{self.firstname} {self.lastname}'
     
     def save(self, *args, **kwargs):
-        # Hash the password if it's not hashed
         if not self.password.startswith(('pbkdf2_sha256$', 'bcrypt$', 'argon2')):
             self.password = make_password(self.password)
         
@@ -102,9 +109,14 @@ class Instructor(models.Model):
         return self.instructor_name
 
 class Rooms(models.Model):
+    room_types = (
+        ('Lecture', 'Lecture'),
+        ('Laboratory', 'Laboratory'),
+    )
+    
     room_name = models.CharField(max_length=100)
     room_capacity = models.IntegerField(validators=[MinValueValidator(0)], default=0)
-    room_type = models.CharField(max_length=100)
+    room_type = models.CharField(max_length=100, choices=room_types, default='Lecture')
     room_department = models.ForeignKey(Departments, on_delete=models.CASCADE, blank=False, null=False)
 
     def __str__(self):
@@ -114,3 +126,29 @@ class Rooms(models.Model):
         verbose_name_plural = "Rooms"
         verbose_name = "Room"
         ordering = ['room_name']
+        
+class Schedule(models.Model):  
+    course = models.ForeignKey(Course, on_delete=models.CASCADE, blank=False, null=False)
+    instructor = models.ForeignKey(Instructor, on_delete=models.CASCADE, blank=False, null=False)
+    room = models.ForeignKey(Rooms, on_delete=models.CASCADE, blank=False, null=False)
+    day = models.CharField(max_length=10, choices=DAYS_OF_THE_WEEK, default='Mon')
+    time_start = models.TimeField()
+    time_end = models.TimeField()
+    
+    def __str__(self) -> str:
+        return f'{self.course} - {self.instructor} - {self.room}'
+    
+    class Meta:
+        verbose_name_plural = "Schedules"
+        verbose_name = "Schedule"
+        ordering = ['course', 'instructor', 'room']
+        unique_together = ['course', 'instructor', 'room']
+    
+    def save(self, *args, **kwargs):
+        self.course = self.course
+        self.instructor = self.instructor
+        self.room = self.room
+        super().save(*args, **kwargs)
+    
+    def delete(self, *args, **kwargs):
+        super().delete(*args, **kwargs)

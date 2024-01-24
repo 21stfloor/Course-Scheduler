@@ -80,13 +80,22 @@
               <div class="table-responsive">
                   {% render_table table %}
               </div>
-            {% endif %}
             <!-- end course table -->
+            <!-- schedule table -->
+            {% if cl.opts.app_label == 'schedulerpages' and cl.opts.model_name == 'schedule' and user.is_staff and not user.is_superuser %}
+            {% load render_table from django_tables2 %}
+            <div class="table-responsive">
+                {% render_table schedule_table %}
+            </div>
+            {% endif %}
+            <!-- end schedule table -->
+        {% else %}
         </div>
         {% block filters %}
             {% if cl.has_filters %}
             <div id="changelist-filter">
                 <h2>{% translate 'Filter' %}</h2>
+                
                 {% if cl.is_facets_optional or cl.has_active_filters %}<div id="changelist-filter-extra-actions">
                 {% if cl.is_facets_optional %}<h3>
                     {% if cl.add_facets %}<a href="{{ cl.remove_facet_link }}" class="hidelink">{% translate "Hide counts" %}</a>
@@ -100,6 +109,8 @@
             </div>
             {% endif %}
         {% endblock %}
-        </div> 
+        
+        </div>
+        {% endif %} 
   </div>
 {% endblock %}
