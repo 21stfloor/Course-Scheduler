@@ -96,10 +96,10 @@ else:
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.mysql',
-            'NAME': 'coursescheduler$scheduler_database',
-            'USER': 'coursescheduler',
+            'NAME': 'schedulesystem$default',
+            'USER': 'schedulesystem',
             'PASSWORD': 'notCommonPassword123$',
-            'HOST': 'coursescheduler.mysql.pythonanywhere-services.com',
+            'HOST': 'schedulesystem.mysql.pythonanywhere-services.com',
             'PORT': '3306',
             'OPTIONS': {
                     'init_command': "SET sql_mode='STRICT_TRANS_TABLES'",
