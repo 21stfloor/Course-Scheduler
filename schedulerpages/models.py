@@ -71,6 +71,11 @@ class Departments(models.Model):
 
     def __str__(self):
         return self.department_name
+    
+    class Meta:
+        verbose_name_plural = "Departments"
+        verbose_name = "Department"
+        ordering = ['department_name']
 
 
 class Course(models.Model):
@@ -95,3 +100,17 @@ class Instructor(models.Model):
 
     def __str__(self):
         return self.instructor_name
+
+class Rooms(models.Model):
+    room_name = models.CharField(max_length=100)
+    room_capacity = models.IntegerField(validators=[MinValueValidator(0)], default=0)
+    room_type = models.CharField(max_length=100)
+    room_department = models.ForeignKey(Departments, on_delete=models.CASCADE, blank=False, null=False)
+
+    def __str__(self):
+        return self.room_name
+    
+    class Meta:
+        verbose_name_plural = "Rooms"
+        verbose_name = "Room"
+        ordering = ['room_name']
