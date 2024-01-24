@@ -9,6 +9,7 @@ from django.utils import timezone
 from django.utils.translation import gettext_lazy as _
 from schedulerpages.managers import CustomUserManager
 from django.utils.http import int_to_base36
+from django.contrib.auth.hashers import make_password
 import uuid
 
 # Create your models here.
@@ -46,6 +47,15 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
         if self.firstname is None and self.lastname is None:
             return self.email
         return f'{self.firstname} {self.lastname}'
+    
+    def save(self, *args, **kwargs):
+        # Hash the password if it's not hashed
+        if not self.password.startswith(('pbkdf2_sha256$', 'bcrypt$', 'argon2')):
+            self.password = make_password(self.password)
+        
+        super().save(*args, **kwargs)
+    
+    
 
 
 class Departments(models.Model):
