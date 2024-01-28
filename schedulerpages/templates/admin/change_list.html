@@ -81,13 +81,13 @@
                   {% render_table table %}
               </div>
             <!-- end course table -->
-            <!-- schedule table --
-            {% if cl.opts.app_label == 'schedulerpages' and cl.opts.model_name == 'schedule' and user.is_staff and not user.is_superuser %}
+            <!-- schedule table -->
+            {% elif cl.opts.app_label == 'schedulerpages' and cl.opts.model_name == 'schedule' and user.is_staff and not user.is_superuser %}
             {% load render_table from django_tables2 %}
             <div class="table-responsive">
                 {% render_table schedule_table %}
             </div>
-            {% endif %}
+
             <!-- end schedule table -->
         {% else %}
         </div>

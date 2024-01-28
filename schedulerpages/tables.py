@@ -16,5 +16,5 @@ class ScheduleTable(tables.Table):
         orderable = False
         model = Schedule
         template_name = "django_tables2/bootstrap.html"
-        fields = ("course", "instructor", "room", "day")
-        attrs = {'class': 'table table-bordered table-hover table-sm'}
+        fields = ("time_start", "instructor", "room", "day")
+        attrs = {'class': 'table table-bordered table-hover table-sm table-primary table-striped'}

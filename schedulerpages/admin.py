@@ -36,13 +36,13 @@ class AdminDepartments(admin.ModelAdmin):
 
 @admin.register(Schedule)
 class ScheduleModelAdmin(admin.ModelAdmin):
-    list_display = ('course', 'instructor', 'room')
+    # list_display = ('course', 'instructor', 'room')
 
     def changelist_view(self, request, extra_context=None):
         extra_context = extra_context or {}
-        schedule_table = ScheduleTable(data=Schedule.objects.all())
-        RequestConfig(request).configure(schedule_table)
-        extra_context['schedule_table'] = schedule_table
+        table = ScheduleTable(data=Schedule.objects.all())
+        RequestConfig(request).configure(table)
+        extra_context['schedule_table'] = table
         return super(ScheduleModelAdmin, self).changelist_view(
             request, extra_context=extra_context,
         )
