@@ -43,6 +43,9 @@ class ScheduleModelAdmin(admin.ModelAdmin):
         table = ScheduleTable(data=Schedule.objects.all())
         RequestConfig(request).configure(table)
         extra_context['schedule_table'] = table
+        instructor_schedule = Schedule.objects.all()
+        
+        extra_context['instructor_schedule'] = instructor_schedule
         return super(ScheduleModelAdmin, self).changelist_view(
             request, extra_context=extra_context,
         )

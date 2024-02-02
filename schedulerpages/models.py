@@ -152,3 +152,62 @@ class Schedule(models.Model):
     
     def delete(self, *args, **kwargs):
         super().delete(*args, **kwargs)
+        
+#make a model for static time from 7am to 7pm with 30 minutes interval
+class Time(models.Model):
+    time_slots = (
+        ('7:00 AM', '7:00 AM'),
+        ('7:30 AM', '7:30 AM'),
+        ('8:00 AM', '8:00 AM'),
+        ('8:30 AM', '8:30 AM'),
+        ('9:00 AM', '9:00 AM'),
+        ('9:30 AM', '9:30 AM'),
+        ('10:00 AM', '10:00 AM'),
+        ('10:30 AM', '10:30 AM'),
+        ('11:00 AM', '11:00 AM'),
+        ('11:30 AM', '11:30 AM'),
+        ('12:00 PM', '12:00 PM'),
+        ('12:30 PM', '12:30 PM'),
+        ('1:00 PM', '1:00 PM'),
+        ('1:30 PM', '1:30 PM'),
+        ('2:00 PM', '2:00 PM'),
+        ('2:30 PM', '2:30 PM'),
+        ('3:00 PM', '3:00 PM'),
+        ('3:30 PM', '3:30 PM'),
+        ('4:00 PM', '4:00 PM'),
+        ('4:30 PM', '4:30 PM'),
+        ('5:00 PM', '5:00 PM'),
+        ('5:30 PM', '5:30 PM'),
+        ('6:00 PM', '6:00 PM'),
+        ('6:30 PM', '6:30 PM'),
+        ('7:00 PM', '7:00 PM'),
+    )
+    
+    time_slot = models.CharField(max_length=10, choices=time_slots, default='7:00 AM')
+    
+    def __str__(self) -> str:
+        return self.time_slot
+    
+    class Meta:
+        verbose_name_plural = "Time Slots"
+        verbose_name = "Time Slot"
+        ordering = ['time_slot']
+        unique_together = ['time_slot']
+        
+class CombinedCourseSchedule(models.Model):
+    # add the time field here
+    course = models.ForeignKey(Course, on_delete=models.CASCADE, blank=False, null=False)
+    instructor = models.ForeignKey(Instructor, on_delete=models.CASCADE, blank=False, null=False)
+    room = models.ForeignKey(Rooms, on_delete=models.CASCADE, blank=False, null=False)
+    time_slot = models.ForeignKey(Time, on_delete=models.CASCADE, blank=False, null=False)
+    
+    def __str__(self) -> str:
+        return f'{self.course} - {self.instructor} - {self.room} - {self.time_slot}'
+    
+    class Meta:
+        verbose_name_plural = "Combined Course Schedules"
+        verbose_name = "Combined Course Schedule"
+        ordering = ['course', 'instructor', 'room', 'time_slot']
+        unique_together = ['course', 'instructor', 'room', 'time_slot']
+    
+    

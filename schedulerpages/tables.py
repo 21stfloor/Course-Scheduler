@@ -1,5 +1,5 @@
 import django_tables2 as tables
-from .models import Course, Schedule
+from .models import Course, Schedule, CombinedCourseSchedule
 
 
 class CourseTable(tables.Table):
@@ -14,7 +14,7 @@ class CourseTable(tables.Table):
 class ScheduleTable(tables.Table):
     class Meta:
         orderable = False
-        model = Schedule
+        model = CombinedCourseSchedule
         template_name = "django_tables2/bootstrap.html"
-        fields = ("time_start", "instructor", "room", "day")
+        fields = ("time_slot", "instructor", "room", "day")
         attrs = {'class': 'table table-bordered table-hover table-sm table-primary table-striped'}
