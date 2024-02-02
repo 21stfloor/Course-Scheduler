@@ -96,8 +96,8 @@ class Course(models.Model):
     adviser = models.CharField(max_length=100)
 
     def __str__(self):
-        return self.course_code
-
+        return self.course_code + '<br>' + self.course_year_block + '<br>' + self.adviser
+    
 
 class Instructor(models.Model):
     user = models.OneToOneField(CustomUser, on_delete=models.CASCADE, primary_key=True)

@@ -84,7 +84,7 @@
             <!-- schedule table -->
             {% elif cl.opts.app_label == 'schedulerpages' and cl.opts.model_name == 'schedule' and user.is_staff and not user.is_superuser %}
             {% load render_table from django_tables2 %}
-            <form id="course-filter-form" method="get" action="{% url 'admin:schedulerpages_schedule_changelist' %}">
+            {% comment %} <form id="course-filter-form" method="get" action="{% url 'admin:schedulerpages_schedule_changelist' %}">
               <div class="form-group">
                 <label for="department">Department:</label>
                 <select class="form-control" id="department" name="department">
@@ -97,7 +97,7 @@
               </div>
               <br>
               <button type="submit" class="btn btn-primary">Apply Filter</button>
-            </form>
+            </form> {% endcomment %}
             
             <div class="table-responsive">
                 {% comment %} {% render_table schedule_table %} {% endcomment %}
@@ -352,9 +352,9 @@
           var instructors = [
                 {% for instructor in instructor_schedule %}
                     {
-                        "id": "{{ instructor.instructor_id }}",
-                        "course": "{{ instructor.course_id }}",
-                        "room": "{{ instructor.room_id }}",
+                        "id": "{{ instructor.course_course_code }}",
+                        "course": "{{ instructor.course|safe }}",
+                        "room": "{{ instructor.room }}",
                         "day": "{{ instructor.day }}",
                         "time_start": "{{ instructor.time_start }}",
                         "time_end": "{{ instructor.time_end }}",
@@ -365,9 +365,9 @@
           const days = ['Mon', 'Tues', 'Wed', 'Thurs', 'Fri', 'Sat'];
           
           console.table(instructors);
-
+          
           $(document).ready(function() {
-            
+            var selectedInstructorIndex = -1;
             for (var i = 0; i < instructors.length; i++) {
 
               var dataStart = instructors[i].time_start;
@@ -398,6 +398,8 @@
                 var thEndMoment = moment(thEnd, "hh:mm a");
 
                 if (dataStartMoment.isSameOrBefore(thStartMoment) && dataEndMoment.isSameOrAfter(thEndMoment)) {
+                  selectedInstructorIndex = i;
+
                   var dayInt = instructors[i].day;
                   console.log(dayInt);
                   var index = days.indexOf(instructors[i].day); 
@@ -406,14 +408,19 @@
   
                   var tdElements = thElement.closest('tr').find('td');
 
-                  
                   var correspondingTd = tdElements.eq(index);  
-                  $(correspondingTd).addClass('bg-primary');
+                  $(correspondingTd).addClass('selectedTd');
                 } else {
                     console.log(dataStart, dataEnd, thStart, thEnd);
                 }
               });
             }
+
+            var selectedTdArray = $('.selectedTd');
+            $(selectedTdArray[0]).attr('rowspan', selectedTdArray.length - 1); 
+            $(selectedTdArray[0]).append(`<p style="text-align: center;"><b>${instructors[selectedInstructorIndex].course} <br> ${instructors[selectedInstructorIndex].room}</b></p>`);
+            $(selectedTdArray[0]).css("vertical-align", "middle");
+            $('.selectedTd:not(:first)').remove();
           });
 
         </script>
