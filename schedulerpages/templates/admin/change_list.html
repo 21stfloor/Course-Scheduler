@@ -352,7 +352,7 @@
           var instructors = [
                 {% for instructor in instructor_schedule %}
                     {
-                        "id": "{{ instructor.course_course_code }}",
+                        "id": "{{ instructor.id }}",
                         "course": "{{ instructor.course|safe }}",
                         "room": "{{ instructor.room }}",
                         "day": "{{ instructor.day }}",
@@ -409,18 +409,20 @@
                   var tdElements = thElement.closest('tr').find('td');
 
                   var correspondingTd = tdElements.eq(index);  
-                  $(correspondingTd).addClass('selectedTd');
+                  $(correspondingTd).addClass(`selectedTd-${instructors[i].id}`);
                 } else {
                     console.log(dataStart, dataEnd, thStart, thEnd);
                 }
               });
+              
+              var selectedTdArray = $(`.selectedTd-${instructors[i].id}`);
+              $(selectedTdArray[0]).attr('rowspan', selectedTdArray.length); 
+              $(selectedTdArray[0]).append(`<p style="text-align: center;"><b>${instructors[selectedInstructorIndex].course} <br> ${instructors[selectedInstructorIndex].room}</b></p>`);
+              $(selectedTdArray[0]).css("vertical-align", "middle");
+              $(`.selectedTd-${instructors[i].id}:not(:first)`).remove();
             }
 
-            var selectedTdArray = $('.selectedTd');
-            $(selectedTdArray[0]).attr('rowspan', selectedTdArray.length - 1); 
-            $(selectedTdArray[0]).append(`<p style="text-align: center;"><b>${instructors[selectedInstructorIndex].course} <br> ${instructors[selectedInstructorIndex].room}</b></p>`);
-            $(selectedTdArray[0]).css("vertical-align", "middle");
-            $('.selectedTd:not(:first)').remove();
+            
           });
 
         </script>
