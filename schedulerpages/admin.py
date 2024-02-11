@@ -2,7 +2,7 @@ from django.contrib import admin
 from django.apps import apps
 from django.contrib.auth.models import Group
 from django_tables2 import RequestConfig
-from .models import Course, Instructor, CustomUser, Departments, Rooms, Schedule
+from .models import Course, Instructor, CustomUser, Departments, Rooms, Schedule, Time, CombinedCourseSchedule
 from .tables import CourseTable, ScheduleTable
 
 # Register your models here.
@@ -62,4 +62,4 @@ for model in models:
     except admin.sites.AlreadyRegistered:
         pass
 
-# admin.site.unregister((Group))
+admin.site.unregister((Time, CombinedCourseSchedule))

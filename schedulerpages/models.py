@@ -115,7 +115,6 @@ class Rooms(models.Model):
     )
     
     room_name = models.CharField(max_length=100)
-    room_capacity = models.IntegerField(validators=[MinValueValidator(0)], default=0)
     room_type = models.CharField(max_length=100, choices=room_types, default='Lecture')
     room_department = models.ForeignKey(Departments, on_delete=models.CASCADE, blank=False, null=False)
 

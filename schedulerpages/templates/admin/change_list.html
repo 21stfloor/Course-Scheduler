@@ -83,21 +83,21 @@
             <!-- end course table -->
             <!-- schedule table -->
             {% elif cl.opts.app_label == 'schedulerpages' and cl.opts.model_name == 'schedule' and user.is_staff and not user.is_superuser %}
-            {% load render_table from django_tables2 %}
-            {% comment %} <form id="course-filter-form" method="get" action="{% url 'admin:schedulerpages_schedule_changelist' %}">
-              <div class="form-group">
-                <label for="department">Department:</label>
-                <select class="form-control" id="department" name="department">
-                  <option value="">All</option>
-                  {% for department in departments %}
-                  <br>
-                  <option value="{{ department.id }}">{{ department.department_name }}</option>
-                  {% endfor %}
-                </select>
-              </div>
-              <br>
-              <button type="submit" class="btn btn-primary">Apply Filter</button>
-            </form> {% endcomment %}
+<!--            {% load render_table from django_tables2 %}-->
+<!--            {% comment %} <form id="course-filter-form" method="get" action="{% url 'admin:schedulerpages_schedule_changelist' %}">-->
+<!--              <div class="form-group">-->
+<!--                <label for="department">Department:</label>-->
+<!--                <select class="form-control" id="department" name="department">-->
+<!--                  <option value="">All</option>-->
+<!--                  {% for department in departments %}-->
+<!--                  <br>-->
+<!--                  <option value="{{ department.id }}">{{ department.department_name }}</option>-->
+<!--                  {% endfor %}-->
+<!--                </select>-->
+<!--              </div>-->
+<!--              <br>-->
+<!--              <button type="submit" class="btn btn-primary">Apply Filter</button>-->
+<!--            </form> {% endcomment %}-->
             
             <div class="table-responsive">
                 {% comment %} {% render_table schedule_table %} {% endcomment %}
