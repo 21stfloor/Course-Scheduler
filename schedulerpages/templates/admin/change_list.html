@@ -99,334 +99,664 @@
 <!--              <button type="submit" class="btn btn-primary">Apply Filter</button>-->
 <!--            </form> {% endcomment %}-->
             
-            <div class="table-responsive">
-                {% comment %} {% render_table schedule_table %} {% endcomment %}
-                <table class="table table-bordered">
-                  <thead>
-                    <tr>
-                      <th scope="col">Time</th>
-                      <th scope="col">Monday</th>
-                      <th scope="col">Tuesday</th>
-                      <th scope="col">Wednesday</th>
-                      <th scope="col">Thursday</th>
-                      <th scope="col">Friday</th>
-                      <th scope="col">Saturday</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <th scope="row" class="sched" data-start="7:00 am" data-end="7:30 am" data-startNoon="AM" data-endNoon="AM">7:00 a.m. - 7:30 a.m.</th>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                    </tr>
-                    <tr>
-                      <th scope="row" class="sched" data-start="7:30 am" data-end="8:00 am" data-startNoon="AM" data-endNoon="AM">7:30 a.m. - 8:00 a.m.</th>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                    </tr>
-                    <tr>
-                      <th scope="row" class="sched" data-start="8:00 am" data-end="8:30 am" data-startNoon="AM" data-endNoon="AM">8:00 a.m. - 8:30 a.m.</th>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                    </tr>
-                    <tr>
-                      <th scope="row" class="sched" data-start="8:30 am" data-end="9:00 am" data-startNoon="AM" data-endNoon="AM">8:30 a.m. - 9:00 a.m.</th>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                    </tr>
-                    <tr>
-                      <th scope="row" class="sched" data-start="9:00 am" data-end="9:30 am" data-startNoon="AM" data-endNoon="AM">9:00 a.m. - 9:30 a.m.</th>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                    </tr>
-                    <tr>
-                      <th scope="row" class="sched" data-start="9:30 am" data-end="10:00 am" data-startNoon="AM" data-endNoon="AM">9:30 a.m. - 10:00 a.m.</th>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                    </tr>
-                    <tr>
-                      <th scope="row" class="sched" data-start="10:00 am" data-end="10:30 am" data-startNoon="AM" data-endNoon="AM">10:00 a.m. - 10:30 a.m.</th>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                    </tr>
-                    <tr>
-                      <th scope="row" class="sched" data-start="10:30 am" data-end="11:00 am" data-startNoon="AM" data-endNoon="AM">10:30 a.m. - 11:00 a.m.</th>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                    </tr>
-                    <tr>
-                      <th scope="row" class="sched" data-start="11:00 am" data-end="11:30 am" data-startNoon="AM" data-endNoon="AM">11:00 a.m. - 11:30 a.m.</th>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                    </tr>
-                    <tr>
-                      <th scope="row" class="sched" data-start="11:30 am" data-end="12:00 pm" data-startNoon="AM" data-endNoon="PM">11:30 a.m. - 12:00  p.m.</th>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                    </tr>
-                    <tr>
-                      <th scope="row">12:00 p.m. - 1:00 p.m.</th>
-                      <td colspan="6" class="text-center"><b>Lunch Break</b></td>
-                    </tr>
-                    <tr>
-                      <th scope="row" class="sched" data-start="1:00 pm" data-end="1:30 pm" data-startNoon="PM" data-endNoon="PM">1:00 p.m. - 1:30 p.m.</th>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                    </tr>
-                    <tr>
-                      <th scope="row" class="sched" data-start="1:30 pm" data-end="2:00 pm" data-startNoon="PM" data-endNoon="PM">1:30 p.m. - 2:00 p.m.</th>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                    </tr>
-                    <tr>
-                      <th scope="row" class="sched" data-start="2:00 pm" data-end="2:30 pm" data-startNoon="PM" data-endNoon="PM">2:00 p.m. - 2:30 p.m.</th>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                    </tr>
-                    <tr>
-                      <th scope="row" class="sched" data-start="2:30 pm" data-end="3:00 pm" data-startNoon="PM" data-endNoon="PM">2:30 p.m. - 3:00 p.m.</th>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                    </tr>
-                    <tr>
-                      <th scope="row" class="sched" data-start="3:00 pm" data-end="3:30 pm" data-startNoon="PM" data-endNoon="PM">3:00 p.m. - 3:30 p.m.</th>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                    </tr>
-                    <tr>
-                      <th scope="row" class="sched" data-start="3:30 pm" data-end="4:00 pm" data-startNoon="PM" data-endNoon="PM">3:30 p.m. - 4:00 p.m.</th>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                    </tr>
-                    <tr>
-                      <th scope="row" class="sched" data-start="4:00 pm" data-end="4:30 pm" data-startNoon="PM" data-endNoon="PM">4:00 p.m. - 4:30 p.m.</th>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                    </tr>
-                    <tr>
-                      <th scope="row" class="sched" data-start="4:30 pm" data-end="5:00 pm" data-startNoon="PM" data-endNoon="PM">4:30 p.m. - 5:00 p.m.</th>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                    </tr>
-                    <tr>
-                      <th scope="row" class="sched" data-start="5:00 pm" data-end="5:30 pm" data-startNoon="PM" data-endNoon="PM">5:00 p.m. - 5:30 p.m.</th>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                    </tr>
-                    <tr>
-                      <th scope="row" class="sched" data-start="5:30 pm" data-end="6:00 pm" data-startNoon="PM" data-endNoon="PM">5:30 p.m. - 6:00 p.m.</th>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                    </tr>
-                    <tr>
-                      <th scope="row" class="sched" data-start="6:00 pm" data-end="6:30 pm" data-startNoon="PM" data-endNoon="PM">6:00 p.m. - 6:30 p.m.</th>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                    </tr>
-                    <tr>
-                      <th scope="row" class="sched" data-start="6:30 pm" data-end="7:00 pm" data-startNoon="PM" data-endNoon="PM">6:30 p.m. - 7:00 p.m.</th>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                    </tr>
-                    <tr>
-                      <th scope="row" class="sched" data-start="7:00 pm" data-end="7:30 pm" data-startNoon="PM" data-endNoon="PM">7:00 p.m. - 7:30 p.m.</th>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                    </tr>
-                    <tr>
-                      <th scope="row" class="sched" data-start="7:30 pm" data-end="8:00 pm" data-startNoon="PM" data-endNoon="PM">7:30 p.m. - 8:00 p.m.</th>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                    </tr>
-                    <tr>
-                      <th scope="row" class="sched" data-start="8:00 pm" data-end="8:30 pm" data-startNoon="PM" data-endNoon="PM">8:00 p.m. - 8:30 p.m.</th>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                    </tr> 
+                <div class="table-responsive">
+                    {% comment %}{% render_table schedule_table %} {% endcomment %}
+                    <table class="table table-bordered">
+                      <thead>
+                        <tr>
+                          <th scope="col">Time</th>
+                          <th scope="col">Monday</th>
+                          <th scope="col">Tuesday</th>
+                          <th scope="col">Wednesday</th>
+                          <th scope="col">Thursday</th>
+                          <th scope="col">Friday</th>
+                          <th scope="col">Saturday</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <th scope="row" class="sched" data-start="7:00 am" data-end="7:30 am" data-startNoon="AM" data-endNoon="AM">7:00 a.m. - 7:30 a.m.</th>
+                          <td></td>
+                          <td></td>
+                          <td></td>
+                          <td></td>
+                          <td></td>
+                          <td></td>
+                        </tr>
+                        <tr>
+                          <th scope="row" class="sched" data-start="7:30 am" data-end="8:00 am" data-startNoon="AM" data-endNoon="AM">7:30 a.m. - 8:00 a.m.</th>
+                          <td></td>
+                          <td></td>
+                          <td></td>
+                          <td></td>
+                          <td></td>
+                          <td></td>
+                        </tr>
+                        <tr>
+                          <th scope="row" class="sched" data-start="8:00 am" data-end="8:30 am" data-startNoon="AM" data-endNoon="AM">8:00 a.m. - 8:30 a.m.</th>
+                          <td></td>
+                          <td></td>
+                          <td></td>
+                          <td></td>
+                          <td></td>
+                          <td></td>
+                        </tr>
+                        <tr>
+                          <th scope="row" class="sched" data-start="8:30 am" data-end="9:00 am" data-startNoon="AM" data-endNoon="AM">8:30 a.m. - 9:00 a.m.</th>
+                          <td></td>
+                          <td></td>
+                          <td></td>
+                          <td></td>
+                          <td></td>
+                          <td></td>
+                        </tr>
+                        <tr>
+                          <th scope="row" class="sched" data-start="9:00 am" data-end="9:30 am" data-startNoon="AM" data-endNoon="AM">9:00 a.m. - 9:30 a.m.</th>
+                          <td></td>
+                          <td></td>
+                          <td></td>
+                          <td></td>
+                          <td></td>
+                          <td></td>
+                        </tr>
+                        <tr>
+                          <th scope="row" class="sched" data-start="9:30 am" data-end="10:00 am" data-startNoon="AM" data-endNoon="AM">9:30 a.m. - 10:00 a.m.</th>
+                          <td></td>
+                          <td></td>
+                          <td></td>
+                          <td></td>
+                          <td></td>
+                          <td></td>
+                        </tr>
+                        <tr>
+                          <th scope="row" class="sched" data-start="10:00 am" data-end="10:30 am" data-startNoon="AM" data-endNoon="AM">10:00 a.m. - 10:30 a.m.</th>
+                          <td></td>
+                          <td></td>
+                          <td></td>
+                          <td></td>
+                          <td></td>
+                          <td></td>
+                        </tr>
+                        <tr>
+                          <th scope="row" class="sched" data-start="10:30 am" data-end="11:00 am" data-startNoon="AM" data-endNoon="AM">10:30 a.m. - 11:00 a.m.</th>
+                          <td></td>
+                          <td></td>
+                          <td></td>
+                          <td></td>
+                          <td></td>
+                          <td></td>
+                        </tr>
+                        <tr>
+                          <th scope="row" class="sched" data-start="11:00 am" data-end="11:30 am" data-startNoon="AM" data-endNoon="AM">11:00 a.m. - 11:30 a.m.</th>
+                          <td></td>
+                          <td></td>
+                          <td></td>
+                          <td></td>
+                          <td></td>
+                          <td></td>
+                        </tr>
+                        <tr>
+                          <th scope="row" class="sched" data-start="11:30 am" data-end="12:00 pm" data-startNoon="AM" data-endNoon="PM">11:30 a.m. - 12:00  p.m.</th>
+                          <td></td>
+                          <td></td>
+                          <td></td>
+                          <td></td>
+                          <td></td>
+                          <td></td>
+                        </tr>
+                        <tr>
+                          <th scope="row">12:00 p.m. - 1:00 p.m.</th>
+                          <td colspan="6" class="text-center"><b>Lunch Break</b></td>
+                        </tr>
+                        <tr>
+                          <th scope="row" class="sched" data-start="1:00 pm" data-end="1:30 pm" data-startNoon="PM" data-endNoon="PM">1:00 p.m. - 1:30 p.m.</th>
+                          <td></td>
+                          <td></td>
+                          <td></td>
+                          <td></td>
+                          <td></td>
+                          <td></td>
+                        </tr>
+                        <tr>
+                          <th scope="row" class="sched" data-start="1:30 pm" data-end="2:00 pm" data-startNoon="PM" data-endNoon="PM">1:30 p.m. - 2:00 p.m.</th>
+                          <td></td>
+                          <td></td>
+                          <td></td>
+                          <td></td>
+                          <td></td>
+                          <td></td>
+                        </tr>
+                        <tr>
+                          <th scope="row" class="sched" data-start="2:00 pm" data-end="2:30 pm" data-startNoon="PM" data-endNoon="PM">2:00 p.m. - 2:30 p.m.</th>
+                          <td></td>
+                          <td></td>
+                          <td></td>
+                          <td></td>
+                          <td></td>
+                          <td></td>
+                        </tr>
+                        <tr>
+                          <th scope="row" class="sched" data-start="2:30 pm" data-end="3:00 pm" data-startNoon="PM" data-endNoon="PM">2:30 p.m. - 3:00 p.m.</th>
+                          <td></td>
+                          <td></td>
+                          <td></td>
+                          <td></td>
+                          <td></td>
+                          <td></td>
+                        </tr>
+                        <tr>
+                          <th scope="row" class="sched" data-start="3:00 pm" data-end="3:30 pm" data-startNoon="PM" data-endNoon="PM">3:00 p.m. - 3:30 p.m.</th>
+                          <td></td>
+                          <td></td>
+                          <td></td>
+                          <td></td>
+                          <td></td>
+                          <td></td>
+                        </tr>
+                        <tr>
+                          <th scope="row" class="sched" data-start="3:30 pm" data-end="4:00 pm" data-startNoon="PM" data-endNoon="PM">3:30 p.m. - 4:00 p.m.</th>
+                          <td></td>
+                          <td></td>
+                          <td></td>
+                          <td></td>
+                          <td></td>
+                          <td></td>
+                        </tr>
+                        <tr>
+                          <th scope="row" class="sched" data-start="4:00 pm" data-end="4:30 pm" data-startNoon="PM" data-endNoon="PM">4:00 p.m. - 4:30 p.m.</th>
+                          <td></td>
+                          <td></td>
+                          <td></td>
+                          <td></td>
+                          <td></td>
+                          <td></td>
+                        </tr>
+                        <tr>
+                          <th scope="row" class="sched" data-start="4:30 pm" data-end="5:00 pm" data-startNoon="PM" data-endNoon="PM">4:30 p.m. - 5:00 p.m.</th>
+                          <td></td>
+                          <td></td>
+                          <td></td>
+                          <td></td>
+                          <td></td>
+                          <td></td>
+                        </tr>
+                        <tr>
+                          <th scope="row" class="sched" data-start="5:00 pm" data-end="5:30 pm" data-startNoon="PM" data-endNoon="PM">5:00 p.m. - 5:30 p.m.</th>
+                          <td></td>
+                          <td></td>
+                          <td></td>
+                          <td></td>
+                          <td></td>
+                          <td></td>
+                        </tr>
+                        <tr>
+                          <th scope="row" class="sched" data-start="5:30 pm" data-end="6:00 pm" data-startNoon="PM" data-endNoon="PM">5:30 p.m. - 6:00 p.m.</th>
+                          <td></td>
+                          <td></td>
+                          <td></td>
+                          <td></td>
+                          <td></td>
+                          <td></td>
+                        </tr>
+                        <tr>
+                          <th scope="row" class="sched" data-start="6:00 pm" data-end="6:30 pm" data-startNoon="PM" data-endNoon="PM">6:00 p.m. - 6:30 p.m.</th>
+                          <td></td>
+                          <td></td>
+                          <td></td>
+                          <td></td>
+                          <td></td>
+                          <td></td>
+                        </tr>
+                        <tr>
+                          <th scope="row" class="sched" data-start="6:30 pm" data-end="7:00 pm" data-startNoon="PM" data-endNoon="PM">6:30 p.m. - 7:00 p.m.</th>
+                          <td></td>
+                          <td></td>
+                          <td></td>
+                          <td></td>
+                          <td></td>
+                          <td></td>
+                        </tr>
+                        <tr>
+                          <th scope="row" class="sched" data-start="7:00 pm" data-end="7:30 pm" data-startNoon="PM" data-endNoon="PM">7:00 p.m. - 7:30 p.m.</th>
+                          <td></td>
+                          <td></td>
+                          <td></td>
+                          <td></td>
+                          <td></td>
+                          <td></td>
+                        </tr>
+                        <tr>
+                          <th scope="row" class="sched" data-start="7:30 pm" data-end="8:00 pm" data-startNoon="PM" data-endNoon="PM">7:30 p.m. - 8:00 p.m.</th>
+                          <td></td>
+                          <td></td>
+                          <td></td>
+                          <td></td>
+                          <td></td>
+                          <td></td>
+                        </tr>
+                        <tr>
+                          <th scope="row" class="sched" data-start="8:00 pm" data-end="8:30 pm" data-startNoon="PM" data-endNoon="PM">8:00 p.m. - 8:30 p.m.</th>
+                          <td></td>
+                          <td></td>
+                          <td></td>
+                          <td></td>
+                          <td></td>
+                          <td></td>
+                        </tr>
 
-                  </tbody>
-            </div>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
-        <script>
-          var instructors = [
-                {% for instructor in instructor_schedule %}
-                    {
-                        "id": "{{ instructor.id }}",
-                        "course": "{{ instructor.course|safe }}",
-                        "room": "{{ instructor.room }}",
-                        "day": "{{ instructor.day }}",
-                        "time_start": "{{ instructor.time_start }}",
-                        "time_end": "{{ instructor.time_end }}",
-                    },
-                {% endfor %}
-            ];
+                      </tbody>
+                </div>
+                <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+                <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
+                <script>
+                  var instructors = [
+                        {% for instructor in instructor_schedule %}
+                            {
+                                "id": "{{ instructor.id }}",
+                                "course": "{{ instructor.course|safe }}",
+                                "room": "{{ instructor.room }}",
+                                "day": "{{ instructor.day }}",
+                                "time_start": "{{ instructor.time_start }}",
+                                "time_end": "{{ instructor.time_end }}",
+                            },
+                        {% endfor %}
+                    ];
 
-          const days = ['Mon', 'Tues', 'Wed', 'Thurs', 'Fri', 'Sat'];
-          
-          console.table(instructors);
-          
-          $(document).ready(function() {
-            var selectedInstructorIndex = -1;
-            for (var i = 0; i < instructors.length; i++) {
+                  const days = ['Mon', 'Tues', 'Wed', 'Thurs', 'Fri', 'Sat'];
 
-              var dataStart = instructors[i].time_start;
-              var dataEnd = instructors[i].time_end;
+                  console.table(instructors);
 
-              if(dataStart == 'noon') {
-                dataStart = 12;
-              }
+                  $(document).ready(function() {
+                    var selectedInstructorIndex = -1;
+                    for (var i = 0; i < instructors.length; i++) {
 
-              if(dataEnd == 'noon') {
-                dataEnd = 12;
-              }
-  
-              var dataStartMoment = moment(dataStart, "hh:mm a");
-              var dataEndMoment = moment(dataEnd, "hh:mm a");
+                      var dataStart = instructors[i].time_start;
+                      var dataEnd = instructors[i].time_end;
 
-              $('.sched').each(function() {
-                let thStart = $(this).data('start') 
-                let thEnd = $(this).data('end')
-                let thStartNoon = $(this).data('startnoon')
-                let thEndNoon = $(this).data('endnoon')
-                console.log(thStart);
-                console.log(thEnd);
-                console.log(thStartNoon);
-                console.log(thEndNoon);
+                      if(dataStart == 'noon') {
+                        dataStart = 12;
+                      }
 
-                var thStartMoment = moment(thStart, "hh:mm a");
-                var thEndMoment = moment(thEnd, "hh:mm a");
+                      if(dataEnd == 'noon') {
+                        dataEnd = 12;
+                      }
 
-                if (dataStartMoment.isSameOrBefore(thStartMoment) && dataEndMoment.isSameOrAfter(thEndMoment)) {
-                  selectedInstructorIndex = i;
+                      var dataStartMoment = moment(dataStart, "hh:mm a");
+                      var dataEndMoment = moment(dataEnd, "hh:mm a");
 
-                  var dayInt = instructors[i].day;
-                  console.log(dayInt);
-                  var index = days.indexOf(instructors[i].day); 
-                  console.log(index);
-                  var thElement = $(this);
-  
-                  var tdElements = thElement.closest('tr').find('td');
+                      $('.sched').each(function() {
+                        let thStart = $(this).data('start')
+                        let thEnd = $(this).data('end')
+                        let thStartNoon = $(this).data('startnoon')
+                        let thEndNoon = $(this).data('endnoon')
+                        console.log(thStart);
+                        console.log(thEnd);
+                        console.log(thStartNoon);
+                        console.log(thEndNoon);
 
-                  var correspondingTd = tdElements.eq(index);  
-                  $(correspondingTd).addClass(`selectedTd-${instructors[i].id}`);
-                } else {
-                    console.log(dataStart, dataEnd, thStart, thEnd);
-                }
-              });
-              
-              var selectedTdArray = $(`.selectedTd-${instructors[i].id}`);
-              $(selectedTdArray[0]).attr('rowspan', selectedTdArray.length); 
-              $(selectedTdArray[0]).append(`<p style="text-align: center;"><b>${instructors[selectedInstructorIndex].course} <br> ${instructors[selectedInstructorIndex].room}</b></p>`);
-              $(selectedTdArray[0]).css("vertical-align", "middle");
-              $(`.selectedTd-${instructors[i].id}:not(:first)`).remove();
-            }
+                        var thStartMoment = moment(thStart, "hh:mm a");
+                        var thEndMoment = moment(thEnd, "hh:mm a");
 
-            
-          });
+                        if (dataStartMoment.isSameOrBefore(thStartMoment) && dataEndMoment.isSameOrAfter(thEndMoment)) {
+                          selectedInstructorIndex = i;
 
-        </script>
-            <!-- end schedule table -->
+                          var dayInt = instructors[i].day;
+                          console.log(dayInt);
+                          var index = days.indexOf(instructors[i].day);
+                          console.log(index);
+                          var thElement = $(this);
+
+                          var tdElements = thElement.closest('tr').find('td');
+
+                          var correspondingTd = tdElements.eq(index);
+                          $(correspondingTd).addClass(`selectedTd-${instructors[i].id}`);
+                        } else {
+                            console.log(dataStart, dataEnd, thStart, thEnd);
+                        }
+                      });
+
+                      var selectedTdArray = $(`.selectedTd-${instructors[i].id}`);
+                      $(selectedTdArray[0]).attr('rowspan', selectedTdArray.length);
+                      $(selectedTdArray[0]).append(`<p style="text-align: center;"><b>${instructors[selectedInstructorIndex].course} <br> ${instructors[selectedInstructorIndex].room}</b></p>`);
+                      $(selectedTdArray[0]).css("vertical-align", "middle");
+                      $(`.selectedTd-${instructors[i].id}:not(:first)`).remove();
+                    }
+
+
+                  });
+
+                </script>
+                <!-- end schedule table -->
+            {% elif cl.opts.app_label == 'schedulerpages' and cl.opts.model_name == 'rooms' and user.is_staff and not user.is_superuser %}
+                <!-- start rooms table -->
+                <div class="table-responsive">
+                    {% comment %}{% render_table schedule_table %} {% endcomment %}
+                    <table class="table table-bordered">
+                      <thead>
+                        <tr>
+                          <th scope="col">Time</th>
+                          <th scope="col">Monday</th>
+                          <th scope="col">Tuesday</th>
+                          <th scope="col">Wednesday</th>
+                          <th scope="col">Thursday</th>
+                          <th scope="col">Friday</th>
+                          <th scope="col">Saturday</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <th scope="row" class="sched" data-start="7:00 am" data-end="7:30 am" data-startNoon="AM" data-endNoon="AM">7:00 a.m. - 7:30 a.m.</th>
+                          <td></td>
+                          <td></td>
+                          <td></td>
+                          <td></td>
+                          <td></td>
+                          <td></td>
+                        </tr>
+                        <tr>
+                          <th scope="row" class="sched" data-start="7:30 am" data-end="8:00 am" data-startNoon="AM" data-endNoon="AM">7:30 a.m. - 8:00 a.m.</th>
+                          <td></td>
+                          <td></td>
+                          <td></td>
+                          <td></td>
+                          <td></td>
+                          <td></td>
+                        </tr>
+                        <tr>
+                          <th scope="row" class="sched" data-start="8:00 am" data-end="8:30 am" data-startNoon="AM" data-endNoon="AM">8:00 a.m. - 8:30 a.m.</th>
+                          <td></td>
+                          <td></td>
+                          <td></td>
+                          <td></td>
+                          <td></td>
+                          <td></td>
+                        </tr>
+                        <tr>
+                          <th scope="row" class="sched" data-start="8:30 am" data-end="9:00 am" data-startNoon="AM" data-endNoon="AM">8:30 a.m. - 9:00 a.m.</th>
+                          <td></td>
+                          <td></td>
+                          <td></td>
+                          <td></td>
+                          <td></td>
+                          <td></td>
+                        </tr>
+                        <tr>
+                          <th scope="row" class="sched" data-start="9:00 am" data-end="9:30 am" data-startNoon="AM" data-endNoon="AM">9:00 a.m. - 9:30 a.m.</th>
+                          <td></td>
+                          <td></td>
+                          <td></td>
+                          <td></td>
+                          <td></td>
+                          <td></td>
+                        </tr>
+                        <tr>
+                          <th scope="row" class="sched" data-start="9:30 am" data-end="10:00 am" data-startNoon="AM" data-endNoon="AM">9:30 a.m. - 10:00 a.m.</th>
+                          <td></td>
+                          <td></td>
+                          <td></td>
+                          <td></td>
+                          <td></td>
+                          <td></td>
+                        </tr>
+                        <tr>
+                          <th scope="row" class="sched" data-start="10:00 am" data-end="10:30 am" data-startNoon="AM" data-endNoon="AM">10:00 a.m. - 10:30 a.m.</th>
+                          <td></td>
+                          <td></td>
+                          <td></td>
+                          <td></td>
+                          <td></td>
+                          <td></td>
+                        </tr>
+                        <tr>
+                          <th scope="row" class="sched" data-start="10:30 am" data-end="11:00 am" data-startNoon="AM" data-endNoon="AM">10:30 a.m. - 11:00 a.m.</th>
+                          <td></td>
+                          <td></td>
+                          <td></td>
+                          <td></td>
+                          <td></td>
+                          <td></td>
+                        </tr>
+                        <tr>
+                          <th scope="row" class="sched" data-start="11:00 am" data-end="11:30 am" data-startNoon="AM" data-endNoon="AM">11:00 a.m. - 11:30 a.m.</th>
+                          <td></td>
+                          <td></td>
+                          <td></td>
+                          <td></td>
+                          <td></td>
+                          <td></td>
+                        </tr>
+                        <tr>
+                          <th scope="row" class="sched" data-start="11:30 am" data-end="12:00 pm" data-startNoon="AM" data-endNoon="PM">11:30 a.m. - 12:00  p.m.</th>
+                          <td></td>
+                          <td></td>
+                          <td></td>
+                          <td></td>
+                          <td></td>
+                          <td></td>
+                        </tr>
+                        <tr>
+                          <th scope="row">12:00 p.m. - 1:00 p.m.</th>
+                          <td colspan="6" class="text-center"><b>Lunch Break</b></td>
+                        </tr>
+                        <tr>
+                          <th scope="row" class="sched" data-start="1:00 pm" data-end="1:30 pm" data-startNoon="PM" data-endNoon="PM">1:00 p.m. - 1:30 p.m.</th>
+                          <td></td>
+                          <td></td>
+                          <td></td>
+                          <td></td>
+                          <td></td>
+                          <td></td>
+                        </tr>
+                        <tr>
+                          <th scope="row" class="sched" data-start="1:30 pm" data-end="2:00 pm" data-startNoon="PM" data-endNoon="PM">1:30 p.m. - 2:00 p.m.</th>
+                          <td></td>
+                          <td></td>
+                          <td></td>
+                          <td></td>
+                          <td></td>
+                          <td></td>
+                        </tr>
+                        <tr>
+                          <th scope="row" class="sched" data-start="2:00 pm" data-end="2:30 pm" data-startNoon="PM" data-endNoon="PM">2:00 p.m. - 2:30 p.m.</th>
+                          <td></td>
+                          <td></td>
+                          <td></td>
+                          <td></td>
+                          <td></td>
+                          <td></td>
+                        </tr>
+                        <tr>
+                          <th scope="row" class="sched" data-start="2:30 pm" data-end="3:00 pm" data-startNoon="PM" data-endNoon="PM">2:30 p.m. - 3:00 p.m.</th>
+                          <td></td>
+                          <td></td>
+                          <td></td>
+                          <td></td>
+                          <td></td>
+                          <td></td>
+                        </tr>
+                        <tr>
+                          <th scope="row" class="sched" data-start="3:00 pm" data-end="3:30 pm" data-startNoon="PM" data-endNoon="PM">3:00 p.m. - 3:30 p.m.</th>
+                          <td></td>
+                          <td></td>
+                          <td></td>
+                          <td></td>
+                          <td></td>
+                          <td></td>
+                        </tr>
+                        <tr>
+                          <th scope="row" class="sched" data-start="3:30 pm" data-end="4:00 pm" data-startNoon="PM" data-endNoon="PM">3:30 p.m. - 4:00 p.m.</th>
+                          <td></td>
+                          <td></td>
+                          <td></td>
+                          <td></td>
+                          <td></td>
+                          <td></td>
+                        </tr>
+                        <tr>
+                          <th scope="row" class="sched" data-start="4:00 pm" data-end="4:30 pm" data-startNoon="PM" data-endNoon="PM">4:00 p.m. - 4:30 p.m.</th>
+                          <td></td>
+                          <td></td>
+                          <td></td>
+                          <td></td>
+                          <td></td>
+                          <td></td>
+                        </tr>
+                        <tr>
+                          <th scope="row" class="sched" data-start="4:30 pm" data-end="5:00 pm" data-startNoon="PM" data-endNoon="PM">4:30 p.m. - 5:00 p.m.</th>
+                          <td></td>
+                          <td></td>
+                          <td></td>
+                          <td></td>
+                          <td></td>
+                          <td></td>
+                        </tr>
+                        <tr>
+                          <th scope="row" class="sched" data-start="5:00 pm" data-end="5:30 pm" data-startNoon="PM" data-endNoon="PM">5:00 p.m. - 5:30 p.m.</th>
+                          <td></td>
+                          <td></td>
+                          <td></td>
+                          <td></td>
+                          <td></td>
+                          <td></td>
+                        </tr>
+                        <tr>
+                          <th scope="row" class="sched" data-start="5:30 pm" data-end="6:00 pm" data-startNoon="PM" data-endNoon="PM">5:30 p.m. - 6:00 p.m.</th>
+                          <td></td>
+                          <td></td>
+                          <td></td>
+                          <td></td>
+                          <td></td>
+                          <td></td>
+                        </tr>
+                        <tr>
+                          <th scope="row" class="sched" data-start="6:00 pm" data-end="6:30 pm" data-startNoon="PM" data-endNoon="PM">6:00 p.m. - 6:30 p.m.</th>
+                          <td></td>
+                          <td></td>
+                          <td></td>
+                          <td></td>
+                          <td></td>
+                          <td></td>
+                        </tr>
+                        <tr>
+                          <th scope="row" class="sched" data-start="6:30 pm" data-end="7:00 pm" data-startNoon="PM" data-endNoon="PM">6:30 p.m. - 7:00 p.m.</th>
+                          <td></td>
+                          <td></td>
+                          <td></td>
+                          <td></td>
+                          <td></td>
+                          <td></td>
+                        </tr>
+                        <tr>
+                          <th scope="row" class="sched" data-start="7:00 pm" data-end="7:30 pm" data-startNoon="PM" data-endNoon="PM">7:00 p.m. - 7:30 p.m.</th>
+                          <td></td>
+                          <td></td>
+                          <td></td>
+                          <td></td>
+                          <td></td>
+                          <td></td>
+                        </tr>
+                        <tr>
+                          <th scope="row" class="sched" data-start="7:30 pm" data-end="8:00 pm" data-startNoon="PM" data-endNoon="PM">7:30 p.m. - 8:00 p.m.</th>
+                          <td></td>
+                          <td></td>
+                          <td></td>
+                          <td></td>
+                          <td></td>
+                          <td></td>
+                        </tr>
+                        <tr>
+                          <th scope="row" class="sched" data-start="8:00 pm" data-end="8:30 pm" data-startNoon="PM" data-endNoon="PM">8:00 p.m. - 8:30 p.m.</th>
+                          <td></td>
+                          <td></td>
+                          <td></td>
+                          <td></td>
+                          <td></td>
+                          <td></td>
+                        </tr>
+
+                      </tbody>
+                </div>
+                <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+                <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
+                <script>
+                  var rooms = [
+                        {% for rooms in rooms_table %}
+                            {
+                                "id": "{{ rooms.id }}",
+                                "course": "{{ rooms.course|safe }}",
+                                "room": "{{ rooms.room }}",
+                                "day": "{{ rooms.day }}",
+                                "time_start": "{{ rooms.time_start }}",
+                                "time_end": "{{ rooms.time_end }}",
+                            },
+                        {% endfor %}
+                    ];
+
+                  const days = ['Mon', 'Tues', 'Wed', 'Thurs', 'Fri', 'Sat'];
+
+                  console.table(rooms);
+
+                  // $(document).ready(function() {
+                  //   var selectedInstructorIndex = -1;
+                  //   for (var i = 0; i < instructors.length; i++) {
+                  //
+                  //     var dataStart = instructors[i].time_start;
+                  //     var dataEnd = instructors[i].time_end;
+                  //
+                  //     if(dataStart == 'noon') {
+                  //       dataStart = 12;
+                  //     }
+                  //
+                  //     if(dataEnd == 'noon') {
+                  //       dataEnd = 12;
+                  //     }
+                  //
+                  //     var dataStartMoment = moment(dataStart, "hh:mm a");
+                  //     var dataEndMoment = moment(dataEnd, "hh:mm a");
+                  //
+                  //     $('.sched').each(function() {
+                  //       let thStart = $(this).data('start')
+                  //       let thEnd = $(this).data('end')
+                  //       let thStartNoon = $(this).data('startnoon')
+                  //       let thEndNoon = $(this).data('endnoon')
+                  //       console.log(thStart);
+                  //       console.log(thEnd);
+                  //       console.log(thStartNoon);
+                  //       console.log(thEndNoon);
+                  //
+                  //       var thStartMoment = moment(thStart, "hh:mm a");
+                  //       var thEndMoment = moment(thEnd, "hh:mm a");
+                  //
+                  //       if (dataStartMoment.isSameOrBefore(thStartMoment) && dataEndMoment.isSameOrAfter(thEndMoment)) {
+                  //         selectedInstructorIndex = i;
+                  //
+                  //         var dayInt = instructors[i].day;
+                  //         console.log(dayInt);
+                  //         var index = days.indexOf(instructors[i].day);
+                  //         console.log(index);
+                  //         var thElement = $(this);
+                  //
+                  //         var tdElements = thElement.closest('tr').find('td');
+                  //
+                  //         var correspondingTd = tdElements.eq(index);
+                  //         $(correspondingTd).addClass(`selectedTd-${instructors[i].id}`);
+                  //       } else {
+                  //           console.log(dataStart, dataEnd, thStart, thEnd);
+                  //       }
+                  //     });
+                  //
+                  //     var selectedTdArray = $(`.selectedTd-${instructors[i].id}`);
+                  //     $(selectedTdArray[0]).attr('rowspan', selectedTdArray.length);
+                  //     $(selectedTdArray[0]).append(`<p style="text-align: center;"><b>${instructors[selectedInstructorIndex].course} <br> ${instructors[selectedInstructorIndex].room}</b></p>`);
+                  //     $(selectedTdArray[0]).css("vertical-align", "middle");
+                  //     $(`.selectedTd-${instructors[i].id}:not(:first)`).remove();
+                  //   }
+                  //
+                  //
+                  // });
+
+                </script>
+
         {% else %}
         </div>
         {% block filters %}

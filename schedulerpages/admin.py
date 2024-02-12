@@ -27,12 +27,14 @@ class CourseModelAdmin(admin.ModelAdmin):
 class AdminCustomUser(admin.ModelAdmin):
     pass
 
+
 @admin.register(Departments)
 class AdminDepartments(admin.ModelAdmin):
     list_display = ('department_name',)
 
     def get_queryset(self, request):
         return Departments.objects.all().order_by('department_name')
+
 
 @admin.register(Schedule)
 class ScheduleModelAdmin(admin.ModelAdmin):
@@ -44,11 +46,27 @@ class ScheduleModelAdmin(admin.ModelAdmin):
         RequestConfig(request).configure(table)
         extra_context['schedule_table'] = table
         instructor_schedule = Schedule.objects.all()
-        
+
         extra_context['instructor_schedule'] = instructor_schedule
         return super(ScheduleModelAdmin, self).changelist_view(
             request, extra_context=extra_context,
         )
+
+
+@admin.register(Rooms)
+class AdminRooms(admin.ModelAdmin):
+    # list_display = ('room_name', 'room_type', 'room_department')
+
+    def changelist_view(self, request, extra_context=None):
+        extra_context = extra_context or {}
+        table = ScheduleTable(data=Rooms.objects.all())
+        RequestConfig(request).configure(table)
+        extra_context['rooms_table'] = table
+        return super(AdminRooms, self).changelist_view(
+            request, extra_context=extra_context,
+        )
+
+
 # Register your ModelAdmin
 
 admin.site.register(Course, CourseModelAdmin)
