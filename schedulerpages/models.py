@@ -13,18 +13,19 @@ from schedulerpages.managers import CustomUserManager
 from django.utils.http import int_to_base36
 from django.contrib.auth.hashers import make_password
 import uuid
+from datetime import timedelta, datetime
 
 # Create your models here.
 ID_LENGTH = 30
 DEVICE_ID_LENGTH = 15
 
 DAYS_OF_THE_WEEK = (
-    ('Mon', 'Monday'),
-    ('Tues', 'Tuesday'),
-    ('Wed', 'Wednesday'),
-    ('Thurs', 'Thursday'),
-    ('Fri', 'Friday'),
-    ('Sat', 'Saturday'),
+    (0, 'Monday'),
+    (1, 'Tuesday'),
+    (2, 'Wednesday'),
+    (3, 'Thursday'),
+    (4, 'Friday'),
+    (5, 'Saturday'),
 )
 
 
@@ -132,9 +133,9 @@ class Schedule(models.Model):
     course = models.ForeignKey(Course, on_delete=models.CASCADE, blank=False, null=False)
     instructor = models.ForeignKey(Instructor, on_delete=models.CASCADE, blank=False, null=False)
     room = models.ForeignKey(Rooms, on_delete=models.CASCADE, blank=False, null=False)
-    day = models.CharField(max_length=10, choices=DAYS_OF_THE_WEEK, default='Mon')
-    time_start = models.TimeField()
-    time_end = models.TimeField()
+    day = models.PositiveSmallIntegerField(choices=DAYS_OF_THE_WEEK, default=0, blank=True, null=True)
+    time_start = models.TimeField(null=True, blank=True)
+    time_end = models.TimeField(null=True, blank=True)
 
     def __str__(self) -> str:
         return f'{self.course} - {self.instructor} - {self.room}'
@@ -145,28 +146,65 @@ class Schedule(models.Model):
         ordering = ['course', 'instructor', 'room']
         unique_together = ['course', 'instructor', 'room']
 
-    def save(self, *args, **kwargs):
-        self.course = self.course
-        self.instructor = self.instructor
-        self.room = self.room
-        super().save(*args, **kwargs)
+    
+    def determine_schedule_time(self):
+        if not self.pk:
+            lecture_units = float(self.course.lecture_units)
+            laboratory_units = float(self.course.laboratory_units)
+            lecture_duration = timedelta(hours=1)
+            laboratory_duration = timedelta(hours=3)
 
-        # course = obj.course
-        # 
-        # if course.lecture_units == 'lecture':
-        #     lecture_duration = timedelta(hours=1)
-        # elif course.laboratory_units == 'laboratory':
-        #     laboratory_duration = timedelta(hours=3)
-        # 
-        # 
-        # start_time = timedelta(hours=7)
-        # 
-        # obj.time_start = start_time
-        # obj.time_end = start_time + lecture_duration
-        # 
-        # obj.day = 'Mon'
-        # 
-        # super().save(obj, *args, **kwargs)
+            total_units_duration = lecture_units * lecture_duration + laboratory_units * laboratory_duration
+
+            schedule_start = datetime.strptime('07:00', '%H:%M')
+            schedule_end = datetime.strptime('20:30', '%H:%M')
+
+            current_day = 0  
+            while current_day <= 5:
+                current_date = schedule_start + timedelta(days=current_day)
+
+                if current_date.weekday() >= 0 and current_date.weekday() <= 5:
+                    existing_schedules = Schedule.objects.filter(day=current_date.weekday())  
+                    current_time = schedule_start
+                    while current_time + total_units_duration <= schedule_end:
+                        potential_time_start = datetime.combine(current_date, current_time.time())
+                        potential_time_end = potential_time_start + total_units_duration
+                        
+                        if self.time_start is not None and self.time_end is not None:
+                            return  
+
+                        conflicts = existing_schedules.filter(
+                            time_start__lte=potential_time_end.time(),
+                            time_end__gte=potential_time_start.time()
+                        ).exists()
+
+                        if not conflicts:
+                            self.day = current_date.weekday()  
+                            self.time_start = potential_time_start.time()
+                            self.time_end = potential_time_end.time()
+                            return
+
+                        current_time += timedelta(hours=1) 
+
+                current_day += 1 
+
+                    
+    def save(self, *args, **kwargs):
+        self.determine_schedule_time()
+        super().save(*args, **kwargs)
+                # lecture_units = float(self.course.lecture_units)
+                # laboratory_units = float(self.course.laboratory_units)
+
+                # if lecture_units == 1.0 and laboratory_units == 1.0:
+                #     lecture_duration = timedelta(hours=1)
+                #     laboratory_duration = timedelta(hours=3)
+                #     time_start = datetime.strptime('07:00', '%H:%M')
+                #     total_units_duration = lecture_duration + laboratory_duration
+                #     time_end = (self.time_start + total_units_duration).time()
+                    
+
+
+            
 
     def delete(self, *args, **kwargs):
         super().delete(*args, **kwargs)
