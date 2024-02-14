@@ -157,8 +157,10 @@ class Schedule(models.Model):
             total_units_duration = lecture_units * lecture_duration + laboratory_units * laboratory_duration
 
             schedule_start = datetime.strptime('07:00', '%H:%M')
-            schedule_end = datetime.strptime('20:30', '%H:%M')
-
+            schedule_end = datetime.strptime('20:00', '%H:%M')
+            lunch_start = datetime.strptime('12:00', '%H:%M')
+            lunch_end = datetime.strptime('13:00', '%H:%M')
+            
             current_day = 0  
             while current_day <= 5:
                 current_date = schedule_start + timedelta(days=current_day)
@@ -172,7 +174,11 @@ class Schedule(models.Model):
                         
                         if self.time_start is not None and self.time_end is not None:
                             return  
-
+                        
+                        if potential_time_start.time() < lunch_end.time() and potential_time_end.time() > lunch_start.time():
+                            current_time += timedelta(hours=1)
+                            continue
+                        
                         conflicts = existing_schedules.filter(
                             time_start__lte=potential_time_end.time(),
                             time_end__gte=potential_time_start.time()
@@ -191,20 +197,7 @@ class Schedule(models.Model):
                     
     def save(self, *args, **kwargs):
         self.determine_schedule_time()
-        super().save(*args, **kwargs)
-                # lecture_units = float(self.course.lecture_units)
-                # laboratory_units = float(self.course.laboratory_units)
-
-                # if lecture_units == 1.0 and laboratory_units == 1.0:
-                #     lecture_duration = timedelta(hours=1)
-                #     laboratory_duration = timedelta(hours=3)
-                #     time_start = datetime.strptime('07:00', '%H:%M')
-                #     total_units_duration = lecture_duration + laboratory_duration
-                #     time_end = (self.time_start + total_units_duration).time()
-                    
-
-
-            
+        super().save(*args, **kwargs)  
 
     def delete(self, *args, **kwargs):
         super().delete(*args, **kwargs)
