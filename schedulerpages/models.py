@@ -132,7 +132,7 @@ class Rooms(models.Model):
 class Schedule(models.Model):
     course = models.ForeignKey(Course, on_delete=models.CASCADE, blank=False, null=False)
     instructor = models.ForeignKey(Instructor, on_delete=models.CASCADE, blank=False, null=False)
-    room = models.ForeignKey(Rooms, on_delete=models.CASCADE, blank=False, null=False)
+    room = models.ForeignKey(Rooms, on_delete=models.CASCADE, blank=True, null=True)
     day = models.PositiveSmallIntegerField(choices=DAYS_OF_THE_WEEK, default=0, blank=True, null=True)
     time_start = models.TimeField(null=True, blank=True)
     time_end = models.TimeField(null=True, blank=True)
@@ -147,57 +147,99 @@ class Schedule(models.Model):
         unique_together = ['course', 'instructor', 'room']
 
     
+    def schedule_lecture(self, current_date, schedule_start, schedule_end, lunch_start, lunch_end):
+        lecture_units = float(self.course.lecture_units)
+        lecture_duration = timedelta(hours=1)
+        
+        total_lecture_duration = lecture_units * lecture_duration
+        existing_lecture_schedules = Schedule.objects.filter(
+            day=current_date.weekday(),
+            room__room_type='Lecture'
+        )
+        current_time = schedule_start
+        while current_time + total_lecture_duration <= schedule_end:
+            potential_time_start = datetime.combine(current_date, current_time.time())
+            potential_time_end = potential_time_start + total_lecture_duration
+
+            if self.time_start is not None and self.time_end is not None:
+                break
+
+            if potential_time_start.time() < lunch_end.time() and potential_time_end.time() > lunch_start.time():
+                current_time += timedelta(hours=1)
+                continue
+
+            conflicts = existing_lecture_schedules.filter(
+                time_start__lte=potential_time_end.time(),
+                time_end__gte=potential_time_start.time()
+            ).exists()
+
+            if not conflicts:
+                self.day = current_date.weekday()
+                self.time_start = potential_time_start.time()
+                self.time_end = potential_time_end.time()
+                self.room = Rooms.objects.filter(room_type='Lecture').first()  # Assign lecture room
+                self.save()  # Save the lecture schedule
+                break
+
+            current_time += timedelta(hours=1)
+
+    def schedule_laboratory(self, current_date, schedule_start, schedule_end, lunch_start, lunch_end):
+        laboratory_units = float(self.course.laboratory_units)
+        laboratory_duration = timedelta(hours=3)
+        
+        total_lab_duration = laboratory_units * laboratory_duration
+        existing_lab_schedules = Schedule.objects.filter(
+            day=current_date.weekday(),
+            room__room_type='Laboratory'
+        )
+        current_time = schedule_start
+        while current_time + total_lab_duration <= schedule_end:
+            potential_time_start = datetime.combine(current_date, current_time.time())
+            potential_time_end = potential_time_start + total_lab_duration
+
+            if self.time_start is not None and self.time_end is not None:
+                break
+
+            if potential_time_start.time() < lunch_end.time() and potential_time_end.time() > lunch_start.time():
+                current_time += timedelta(hours=1)
+                continue
+
+            conflicts = existing_lab_schedules.filter(
+                time_start__lte=potential_time_end.time(),
+                time_end__gte=potential_time_start.time()
+            ).exists()
+
+            if not conflicts:
+                self.day = current_date.weekday()
+                self.time_start = potential_time_start.time()
+                self.time_end = potential_time_end.time()
+                self.room = Rooms.objects.filter(room_type='Laboratory').first()  # Assign laboratory room
+                self.save()  # Save the laboratory schedule
+                break
+
+            current_time += timedelta(hours=1)
+
     def determine_schedule_time(self):
         if not self.pk:
-            lecture_units = float(self.course.lecture_units)
-            laboratory_units = float(self.course.laboratory_units)
-            lecture_duration = timedelta(hours=1)
-            laboratory_duration = timedelta(hours=3)
-
-            total_units_duration = lecture_units * lecture_duration + laboratory_units * laboratory_duration
-
             schedule_start = datetime.strptime('07:00', '%H:%M')
             schedule_end = datetime.strptime('20:00', '%H:%M')
             lunch_start = datetime.strptime('12:00', '%H:%M')
             lunch_end = datetime.strptime('13:00', '%H:%M')
-            
-            current_day = 0  
+
+            current_day = 0
             while current_day <= 5:
                 current_date = schedule_start + timedelta(days=current_day)
 
                 if current_date.weekday() >= 0 and current_date.weekday() <= 5:
-                    existing_schedules = Schedule.objects.filter(day=current_date.weekday())  
-                    current_time = schedule_start
-                    while current_time + total_units_duration <= schedule_end:
-                        potential_time_start = datetime.combine(current_date, current_time.time())
-                        potential_time_end = potential_time_start + total_units_duration
-                        
-                        if self.time_start is not None and self.time_end is not None:
-                            return  
-                        
-                        if potential_time_start.time() < lunch_end.time() and potential_time_end.time() > lunch_start.time():
-                            current_time += timedelta(hours=1)
-                            continue
-                        
-                        conflicts = existing_schedules.filter(
-                            time_start__lte=potential_time_end.time(),
-                            time_end__gte=potential_time_start.time()
-                        ).exists()
+                    self.schedule_lecture(current_date, schedule_start, schedule_end, lunch_start, lunch_end)
+                    self.schedule_laboratory(current_date, schedule_start, schedule_end, lunch_start, lunch_end)
 
-                        if not conflicts:
-                            self.day = current_date.weekday()  
-                            self.time_start = potential_time_start.time()
-                            self.time_end = potential_time_end.time()
-                            return
+                current_day += 1
 
-                        current_time += timedelta(hours=1) 
-
-                current_day += 1 
-
-                    
     def save(self, *args, **kwargs):
         self.determine_schedule_time()
-        super().save(*args, **kwargs)  
+        super().save(*args, **kwargs)
+
 
     def delete(self, *args, **kwargs):
         super().delete(*args, **kwargs)
