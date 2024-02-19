@@ -133,7 +133,7 @@ class Rooms(models.Model):
 class Schedule(models.Model):
     course = models.ForeignKey(Course, on_delete=models.CASCADE, blank=False, null=False)
     instructor = models.ForeignKey(Instructor, on_delete=models.CASCADE, blank=False, null=False)
-    room = models.ForeignKey(Rooms, on_delete=models.CASCADE, blank=True, null=True)
+    room = models.ForeignKey(Rooms, on_delete=models.CASCADE, blank=False, null=False)
     day = models.PositiveSmallIntegerField(choices=DAYS_OF_THE_WEEK, default=0, blank=True, null=True)
     time_start = models.TimeField(null=True, blank=True)
     time_end = models.TimeField(null=True, blank=True)
@@ -221,27 +221,27 @@ class Schedule(models.Model):
         super().delete(*args, **kwargs)
 
 
-class RoomSchedule(models.Model):
-    course = models.ForeignKey(Course, on_delete=models.CASCADE, blank=False, null=False)
-    instructor = models.ForeignKey(Instructor, on_delete=models.CASCADE, blank=False, null=False)
-    schedule = models.ForeignKey(Schedule, on_delete=models.CASCADE, blank=False, null=False)
+# class RoomSchedule(models.Model):
+#     course = models.ForeignKey(Course, on_delete=models.CASCADE, blank=False, null=False)
+#     instructor = models.ForeignKey(Instructor, on_delete=models.CASCADE, blank=False, null=False)
+#     schedule = models.ForeignKey(Schedule, on_delete=models.CASCADE, blank=False, null=False)
     
-    def __str__(self) -> str:
-        return f'{self.course} - {self.instructor} - {self.schedule}'
+#     def __str__(self) -> str:
+#         return f'{self.course} - {self.instructor} - {self.schedule}'
 
-    class Meta:
-        verbose_name_plural = "Room Schedules"
-        verbose_name = "Room Schedule"
-        ordering = ['course', 'instructor']
-        unique_together = ['course', 'instructor']
+#     class Meta:
+#         verbose_name_plural = "Room Schedules"
+#         verbose_name = "Room Schedule"
+#         ordering = ['course', 'instructor']
+#         unique_together = ['course', 'instructor']
 
-    def save(self, *args, **kwargs):
-        self.course = self.course
-        self.instructor = self.instructor
-        super().save(*args, **kwargs)
+#     def save(self, *args, **kwargs):
+#         self.course = self.course
+#         self.instructor = self.instructor
+#         super().save(*args, **kwargs)
 
-    def delete(self, *args, **kwargs):
-        super().delete(*args, **kwargs)
+#     def delete(self, *args, **kwargs):
+#         super().delete(*args, **kwargs)
 
 
 # make a model for static time from 7am to 7pm with 30 minutes interval

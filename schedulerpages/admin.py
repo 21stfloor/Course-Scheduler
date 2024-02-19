@@ -2,7 +2,7 @@ from django.contrib import admin
 from django.apps import apps
 from django.contrib.auth.models import Group
 from django_tables2 import RequestConfig
-from .models import Course, Instructor, CustomUser, Departments, Rooms, Schedule, Time, CombinedCourseSchedule, RoomSchedule
+from .models import Course, Instructor, CustomUser, Departments, Rooms, Schedule, Time, CombinedCourseSchedule
 from .tables import CourseTable, ScheduleTable
 
 # Register your models here.
@@ -67,27 +67,22 @@ class AdminRooms(admin.ModelAdmin):
         # RequestConfig(request).configure(table)
         # extra_context['schedule_table'] = table
         
-        rooms_schedule = Rooms.objects.all()
-        extra_context['rooms_schedule'] = rooms_schedule
+        # rooms_schedule = Rooms.objects.all()
+        # extra_context['rooms_schedule'] = rooms_schedule
         
         instructor_schedule = Schedule.objects.all()
         extra_context['instructor_schedule'] = instructor_schedule
         return super(AdminRooms, self).changelist_view(
             request, extra_context=extra_context,
         )
+        
+    # def get_queryset(self, request):
+    #     qs = super().get_queryset(request)
+    #     room_id = request.GET.get('room')
+    #     if room_id:
+    #         qs = qs.filter(id=room_id)
+    #     return qs
 
-@admin.register(CombinedCourseSchedule)
-class AdminCombinedCourseSchedule(admin.ModelAdmin):
-    
-    def changelist_view(self, request, extra_context=None):
-        extra_context = extra_context or {}
-        
-        instructor_schedule = Schedule.objects.all()
-        extra_context['instructor_schedule'] = instructor_schedule
-        return super(AdminCombinedCourseSchedule, self).changelist_view(
-            request, extra_context=extra_context,
-        ) 
-        
         
 # Register your ModelAdmin
 
@@ -102,4 +97,4 @@ for model in models:
     except admin.sites.AlreadyRegistered:
         pass
 
-admin.site.unregister((Time, RoomSchedule))
+admin.site.unregister((Time, CombinedCourseSchedule))
