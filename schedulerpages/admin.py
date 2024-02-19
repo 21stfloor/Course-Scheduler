@@ -122,4 +122,4 @@ for model in models:
     except admin.sites.AlreadyRegistered:
         pass
 
-admin.site.unregister((Time))
+admin.site.unregister((Time, Group))
