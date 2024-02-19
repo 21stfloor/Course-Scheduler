@@ -66,11 +66,16 @@ class AdminRooms(admin.ModelAdmin):
         # table = ScheduleTable(data=Rooms.objects.all())
         # RequestConfig(request).configure(table)
         # extra_context['schedule_table'] = table
+        rooms_schedule = Rooms.objects.all()
+        instructor_schedule = []
+        room_filter = request.POST.get('roomFilter', '0')
+        if room_filter:
+            instructor_schedule = Schedule.objects.filter(room__id=int(room_filter))
+        if not room_filter or room_filter == '0':
+            instructor_schedule = Schedule.objects.all()
         
-        # rooms_schedule = Rooms.objects.all()
-        # extra_context['rooms_schedule'] = rooms_schedule
-        
-        instructor_schedule = Schedule.objects.all()
+        extra_context['rooms_schedule'] = rooms_schedule
+        extra_context['room_filter'] = str(room_filter)
         extra_context['instructor_schedule'] = instructor_schedule
         return super(AdminRooms, self).changelist_view(
             request, extra_context=extra_context,

@@ -416,12 +416,16 @@
                 <!-- end schedule table -->
             {% elif cl.opts.app_label == 'schedulerpages' and cl.opts.model_name == 'rooms' and user.is_staff and not user.is_superuser %}
                 <div class="table-responsive">
-                  <!--<select id="roomFilter">
-                    <option value="">All Rooms</option>
-                    {% for room in rooms_schedule %}
-                        <option value="{{ room.id }}">{{ room.room_name }}</option>
-                    {% endfor %}
-                  </select>-->
+                  <form method="POST">
+                    {% csrf_token %}
+                    <select id="roomFilter" name="roomFilter">
+                      <option value="0">All Rooms</option>
+                      {% for room in rooms_schedule %}
+                          <option value="{{ room.id }}">{{ room.room_name }}</option>
+                      {% endfor %}
+                    </select>
+                    <button type="submit" class="btn btn-primary">Apply Filter</button>
+                  </form>
                   {% comment %}{% render_table schedule_table %} {% endcomment %}
                   <table class="table table-bordered">
                     <thead>
@@ -662,6 +666,20 @@
                     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
                     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
                     <script>
+                      // Assuming the roomFilterValue is obtained from the server-side
+                      var roomFilterValue = {{ room_filter }}; // Example value
+              
+                      // Set the default selected option based on roomFilterValue
+                      var roomFilterSelect = document.getElementById("roomFilter");
+                      for (var i = 0; i < roomFilterSelect.options.length; i++) {
+                          if (parseInt(roomFilterSelect.options[i].value) === roomFilterValue) {
+                              roomFilterSelect.options[i].selected = true;
+                              break;
+                          }
+                      }
+                  </script>
+              
+                    <script>
                       var instructors = [
                         {% for instructor in instructor_schedule %}
                           {
@@ -678,46 +696,6 @@
                       // const days = ['Mon', 'Tues', 'Wed', 'Thurs', 'Fri', 'Sat'];
 
                       console.table(instructors);
-
-                      /*document.getElementById("roomFilter").addEventListener("change", function() {
-                        var selectedRoomId = this.value;
-                        // Generate the URL using Django's URL template tag
-                        var url = "{% url 'admin:schedulerpages_rooms_changelist' %}?room=" + selectedRoomId;
-                        // Redirect to the generated URL
-                        window.location.href = url;
-
-                        // filter schedules based on selected room
-                        var filteredSchedules = instructors.filter(function(instructor) {
-                          return selectedRoomId === "" || instructor.room === selectedRoomId;
-                        }); 
-
-                        $('tbody td').html('');
-
-
-
-
-                      });*/
-                      /*$("#roomFilter").change(function() {
-                        var selectedRoom = $(this).val();
-                
-                        // Filter instructors based on selected room
-                        var filteredInstructors = instructors.filter(function(instructor) {
-                            return selectedRoom === "" || instructor.room === selectedRoom;
-                        });
-                
-                        $('tbody td').html('');
-                        
-                
-                        // Create and append table rows for filtered instructors
-                        $.each(filteredInstructors, function(index, instructor) {
-                            var row = $("<tr></tr>");
-                
-                            // Add columns for course, room, day, time_start, and time_end here
-                            // (Assuming you have appropriate data fields or rendering logic)
-                
-                            $(".table tbody").append(row);
-                        });
-                    });*/
 
                       $(document).ready(function() {
                         var selectedInstructorIndex = -1;
