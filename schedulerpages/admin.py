@@ -88,10 +88,30 @@ class AdminRooms(admin.ModelAdmin):
     #         qs = qs.filter(id=room_id)
     #     return qs
 
+@admin.register(CombinedCourseSchedule)
+class AdminCombinedCourseSchedule(admin.ModelAdmin):
+    def changelist_view(self, request, extra_context=None):
+        extra_context = extra_context or {}
         
+        course_schedule = Course.objects.all()
+        instructor_schedule = []
+        course_filter = request.POST.get('courseFilter', '0')
+        if course_filter:
+            instructor_schedule = Schedule.objects.filter(course__id=int(course_filter))
+        if not course_filter or course_filter == '0':
+            instructor_schedule = Schedule.objects.all()
+        
+        extra_context['course_schedule'] = course_schedule
+        extra_context['course_filter'] = str(course_filter)
+        extra_context['instructor_schedule'] = instructor_schedule
+        return super(AdminCombinedCourseSchedule, self).changelist_view(
+            request, extra_context=extra_context,
+        )
+
 # Register your ModelAdmin
 
 admin.site.register(Course, CourseModelAdmin)
+
 
 app_config = apps.get_app_config('schedulerpages')
 models = app_config.get_models()
@@ -102,4 +122,4 @@ for model in models:
     except admin.sites.AlreadyRegistered:
         pass
 
-admin.site.unregister((Time, CombinedCourseSchedule))
+admin.site.unregister((Time))

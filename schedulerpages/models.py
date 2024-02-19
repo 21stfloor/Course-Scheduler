@@ -287,17 +287,4 @@ class Time(models.Model):
 
 
 class CombinedCourseSchedule(models.Model):
-    # add the time field here
-    course = models.ForeignKey(Course, on_delete=models.CASCADE, blank=False, null=False)
-    instructor = models.ForeignKey(Instructor, on_delete=models.CASCADE, blank=False, null=False)
-    room = models.ForeignKey(Rooms, on_delete=models.CASCADE, blank=False, null=False)
-    time_slot = models.ForeignKey(Time, on_delete=models.CASCADE, blank=False, null=False)
-
-    def __str__(self) -> str:
-        return f'{self.course} - {self.instructor} - {self.room} - {self.time_slot}'
-
-    class Meta:
-        verbose_name_plural = "Combined Course Schedules"
-        verbose_name = "Combined Course Schedule"
-        ordering = ['course', 'instructor', 'room', 'time_slot']
-        unique_together = ['course', 'instructor', 'room', 'time_slot']
+    pass
